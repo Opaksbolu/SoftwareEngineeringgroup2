@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Authentication</title>
+</head>
+<body>
+    <div id="loginDiv">
+        <h2>Welcome! This is the Project of Group 2</h2>
+        <h2>Calories Tracker</h2>
+        <h2>Sign up or Sign in</h2>
+        <button onclick="showSignupForm()">Sign up</button>
+        <button onclick="showSigninForm()">Sign in</button>
+    </div>
+    
+    <div id="signupDiv" style="display: none;">
+        <h2>Sign up</h2>
+        <input type="text" id="signupUsername" placeholder="Username"><br>
+        <input type="password" id="signupPassword" placeholder="Password"><br>
+        <input type="text" id="fullName" placeholder="Full Name"><br>
+        <input type="number" id="age" placeholder="Age"><br>
+        <input type="number" id="height" placeholder="Height"><br>
+        <input type="number" id="weight" placeholder="Weight"><br>
+        <button onclick="signup()">Submit</button>
+    </div>
+    
+    <div id="signinDiv" style="display: none;">
+        <h2>Sign in</h2>
+        <input type="text" id="signinUsername" placeholder="Username"><br>
+        <input type="password" id="signinPassword" placeholder="Password"><br>
+        <button onclick="login()">Submit</button>
+    </div>
+
+    <div id="userDiv" style="display: none;">
+        <h2>User Information</h2>
+        <p><strong>Full Name:</strong> <span id="fullNameDisplay"></span></p>
+        <p><strong>Age:</strong> <span id="ageDisplay"></span></p>
+        <p><strong>Height:</strong> <span id="heightDisplay"></span></p>
+        <p><strong>Weight:</strong> <span id="weightDisplay"></span></p>
+    </div>
+    
+    <div id="errorDiv" style="display: none;">
+        <p><strong>Error:</strong> Account not found. Please sign up.</p>
+    </div>
+    
+    <script>
+        const users = {};
+        let isSignedIn = false;
+        
+        function showSignupForm() {
+            document.getElementById('loginDiv').style.display = 'none';
+            document.getElementById('signupDiv').style.display = 'block';
+            isSignedIn = false;
+        }
+        
+        function showSigninForm() {
+            document.getElementById('loginDiv').style.display = 'none';
+            document.getElementById('signinDiv').style.display = 'block';
+            isSignedIn = false;
+        }
+        
+        function signup() {
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+            const fullName = document.getElementById('fullName').value;
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            
+            users[username] = { password, fullName, age, height, weight };
+            document.getElementById('signupDiv').style.display = 'none';
+            showWelcomeScreen();
+        }
+        
+        function login() {
+            const username = document.getElementById('signinUsername').value;
+            const password = document.getElementById('signinPassword').value;
+            if (users[username] && users[username].password === password) {
+                document.getElementById('signinDiv').style.display = 'none';
+                isSignedIn = true;
+                showUserForm(username);
+            } else {
+                document.getElementById('errorDiv').style.display = 'block';
+            }
+        }
+        
+        function showUserForm(username) {
+            if (isSignedIn) {
+                const user = users[username];
+                document.getElementById('userDiv').style.display = 'block';
+                document.getElementById('fullNameDisplay').textContent = user.fullName;
+                document.getElementById('ageDisplay').textContent = user.age;
+                document.getElementById('heightDisplay').textContent = user.height;
+                document.getElementById('weightDisplay').textContent = user.weight;
+            }
+        }
+
+        function showWelcomeScreen() {
+            document.getElementById('loginDiv').style.display = 'block';
+            document.getElementById('signupDiv').style.display = 'none';
+            document.getElementById('signinDiv').style.display = 'none';
+            document.getElementById('userDiv').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
