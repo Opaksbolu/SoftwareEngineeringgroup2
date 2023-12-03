@@ -31,7 +31,8 @@
             position: relative;
             z-index: 1;
             width: 300px;
-            height: 300px; /* Adjusted height to 300px */
+            height: 600px;
+            margin-right: 20px; /* Added margin to move it to the right */
             padding: 20px;
             box-sizing: border-box;
             background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
@@ -42,6 +43,10 @@
         #result {
             margin-top: 20px;
             font-weight: bold;
+        }
+
+        #progress {
+            margin-top: 20px;
         }
 
         /* Style adjustments for the form inputs */
@@ -67,38 +72,39 @@
     <div id="frame">
         <h2>Water Intake Tracker</h2>
         <form id="waterIntakeForm">
-            <label for="intakeAmount">Enter Water Intake (in liters):</label>
+            <label for="intakeAmount">Enter Water Intake (in cups):</label>
             <input type="number" step="0.1" id="intakeAmount" required>
             
-            <label for="intakeGoal">Set Daily Water Intake Goal (in liters):</label>
-            <input type="number" step="0.1" id="intakeGoal" required>
-
-            <button type="button" onclick="runWaterIntakeTest()">Log Intake</button>
+            <button type="button" onclick="logWaterIntake()">Log Intake</button>
         </form>
         <div id="result"></div>
+        <div id="progress"></div>
     </div>
 
     <script>
-        function logWaterIntake(intake, goal) {
-            // Assuming WaterIntake.logWaterIntake returns a boolean
-            return intake >= 0 && intake <= goal;
-        }
+        let dailyGoal = 3; // Initial daily goal in liters
+        let totalIntake = 0;
 
-        function runWaterIntakeTest() {
+        function logWaterIntake() {
             const intakeInput = document.getElementById("intakeAmount");
-            const goalInput = document.getElementById("intakeGoal");
             const resultDiv = document.getElementById("result");
+            const progressDiv = document.getElementById("progress");
 
             const intake = parseFloat(intakeInput.value);
-            const goal = parseFloat(goalInput.value);
 
-            if (!isNaN(intake) && !isNaN(goal)) {
-                const result = logWaterIntake(intake, goal);
-                resultDiv.textContent = result
-                    ? "Valid water intake. Good job!"
-                    : "Invalid water intake. Please enter a non-negative value within your goal.";
+            if (!isNaN(intake)) {
+                totalIntake += intake;
+                const remaining = dailyGoal - totalIntake;
+
+                resultDiv.textContent = `You've consumed ${totalIntake.toFixed(2)} cups of water today.`;
+
+                if (remaining > 0) {
+                    progressDiv.textContent = `You have ${remaining.toFixed(2)} cups left to reach your goal.`;
+                } else {
+                    progressDiv.textContent = "Congratulations! You've reached your daily water intake goal.";
+                }
             } else {
-                resultDiv.textContent = "Please enter valid numeric values for water intake and goal.";
+                resultDiv.textContent = "Please enter a valid numeric value for water intake.";
             }
         }
     </script>
