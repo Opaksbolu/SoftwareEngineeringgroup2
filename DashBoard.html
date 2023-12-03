@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Centered Image</title>
+    <title>Horizontal Movement Image</title>
     <style>
         body {
             display: flex;
@@ -16,7 +16,8 @@
         .image-container {
             max-width: 80%;
             text-align: center;
-            animation: moveImage 5s infinite alternate ease-in-out;
+            position: relative;
+            animation: moveImage 5s infinite linear;
         }
         img {
             max-width: 100%;
@@ -28,13 +29,10 @@
 
         @keyframes moveImage {
             0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
+                left: 0;
             }
             100% {
-                transform: translateY(0);
+                left: calc(100% - 100px); /* Adjust 100px based on your image width */
             }
         }
     </style>
