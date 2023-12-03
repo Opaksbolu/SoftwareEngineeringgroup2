@@ -17,7 +17,7 @@
             max-width: 80%;
             text-align: center;
             position: relative;
-            animation: moveImage 5s infinite linear;
+            left: calc(50% - 50px); /* Adjust 50px based on half of your image width */
         }
         img {
             max-width: 100%;
@@ -25,15 +25,6 @@
             display: block;
             margin: 0 auto;
             transition: transform 0.3s ease-in-out;
-        }
-
-        @keyframes moveImage {
-            0% {
-                left: 0;
-            }
-            100% {
-                left: calc(100% - 100px); /* Adjust 100px based on your image width */
-            }
         }
     </style>
 </head>
