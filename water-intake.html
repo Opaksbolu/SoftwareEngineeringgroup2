@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Intake Tracker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Place content on the right side */
+            height: 100vh;
+            background-color: #3498db; /* Blue background color */
+            color: #fff; /* Text color */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        #background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        #frame {
+            position: relative;
+            z-index: 1;
+            width: 300px;
+            height: 300px; /* Adjusted height to 300px */
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Style adjustments for the form inputs */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label, input {
+            margin: 10px 0;
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background image -->
+    <img id="background" src="Group 4.png" alt="Background" />
+
+    <div id="frame">
+        <h2>Water Intake Tracker</h2>
+        <form id="waterIntakeForm">
+            <label for="intakeAmount">Enter Water Intake (in liters):</label>
+            <input type="number" step="0.1" id="intakeAmount" required>
+            
+            <label for="intakeGoal">Set Daily Water Intake Goal (in liters):</label>
+            <input type="number" step="0.1" id="intakeGoal" required>
+
+            <button type="button" onclick="runWaterIntakeTest()">Log Intake</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function logWaterIntake(intake, goal) {
+            // Assuming WaterIntake.logWaterIntake returns a boolean
+            return intake >= 0 && intake <= goal;
+        }
+
+        function runWaterIntakeTest() {
+            const intakeInput = document.getElementById("intakeAmount");
+            const goalInput = document.getElementById("intakeGoal");
+            const resultDiv = document.getElementById("result");
+
+            const intake = parseFloat(intakeInput.value);
+            const goal = parseFloat(goalInput.value);
+
+            if (!isNaN(intake) && !isNaN(goal)) {
+                const result = logWaterIntake(intake, goal);
+                resultDiv.textContent = result
+                    ? "Valid water intake. Good job!"
+                    : "Invalid water intake. Please enter a non-negative value within your goal.";
+            } else {
+                resultDiv.textContent = "Please enter valid numeric values for water intake and goal.";
+            }
+        }
+    </script>
+</body>
+</html>
