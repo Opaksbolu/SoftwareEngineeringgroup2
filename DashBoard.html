@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Centered Image</title>
+    <title>Dynamic Centered Image</title>
     <style>
         body {
             display: flex;
@@ -11,16 +11,31 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            overflow: hidden;
         }
         .image-container {
             max-width: 80%;
             text-align: center;
+            animation: moveImage 5s infinite alternate ease-in-out;
         }
         img {
             max-width: 100%;
             height: auto;
             display: block;
             margin: 0 auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        @keyframes moveImage {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
