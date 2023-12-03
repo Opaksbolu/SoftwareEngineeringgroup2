@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calorie Tracker - Sign In/Sign Up</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 260px;
+      height: 520px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-out;
+      overflow-y: auto;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      color: #e74c3c;
+      margin-bottom: 10px;
+      text-transform: capitalize;
+    }
+
+    h2 {
+      color: #e74c3c;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555555;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: calc(100% - 24px);
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #cccccc;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #e74c3c;
+    }
+
+    button {
+      width: calc(100% - 24px);
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #e74c3c;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c0392b;
+    }
+
+    .forgot-password {
+      color: #e74c3c;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .signup-link {
+      color: #555555;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+
+    .signup-link:hover {
+      color: #e74c3c;
+    }
+
+    @media screen and (max-width: 320px) {
+      .form-container {
+        width: 240px;
+      }
+      input[type="text"],
+      input[type="password"],
+      button {
+        width: calc(100% - 16px);
+      }
+    }
+
+    @media screen and (max-height: 600px) {
+      .form-container {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container" id="signin-form">
+    <h1>Calorie Tracker</h1>
+    <h2>Sign In</h2>
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit" onclick="signIn()">Sign In</button>
+    <p class="forgot-password">Forgot password?</p>
+    <a href="#" class="signup-link" onclick="toggleForm()">Don't have an account? Sign Up</a>
+  </div>
+
+  <div class="form-container" id="signup-form" style="display: none;">
+    <h1>Calorie Tracker</h1>
+    <h2>Sign Up</h2>
+    <div class="input-group">
+      <label for="newUsername">Username</label>
+      <input type="text" id="newUsername" name="newUsername" required>
+    </div>
+    <div class="input-group">
+      <label for="newPassword">Password</label>
+      <input type="password" id="newPassword" name="newPassword" required>
+    </div>
+    <div class="input-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <button type="button" onclick="signUp()">Sign Up</button>
+    <a href="#" class="signup-link" onclick="toggleForm()">Already have an account? Sign In</a>
+  </div>
+
+  <script>
+    let users = []; // This array will store user data
+
+    function toggleForm() {
+      var signinForm = document.getElementById("signin-form");
+      var signupForm = document.getElementById("signup-form");
+
+      if (signinForm.style.display === "none") {
+        signinForm.style.display = "block";
+        signupForm.style.display = "none";
+      } else {
+        signinForm.style.display = "none";
+        signupForm.style.display = "block";
+      }
+    }
+
+    function signIn() {
+      const signInUsername = document.getElementById("username").value;
+      const signInPassword = document.getElementById("password").value;
+
+      // Check if user exists in the array (for simplicity, using a username as a unique identifier)
+      const user = users.find(u => u.username === signInUsername);
+
+      if (user && user.password === signInPassword) {
+        window.location.href = "https://github.com/Opaksbolu/SoftwareEngineeringgroup2/blob/main/Group%203.png?raw=true";
+      } else {
+        alert("Incorrect username or password");
+      }
+    }
+
+    function signUp() {
+      const signUpUsername = document.getElementById("newUsername").value;
+      const signUpPassword = document.getElementById("newPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (signUpPassword !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      // Create a new user object
+      const newUser = {
+        username: signUpUsername,
+        password: signUpPassword,
+      };
+
+      // Store the new user object in the users array
+      users.push(newUser);
+
+      // Show the sign-in form after successful sign-up
+      toggleForm();
+    }
+  </script>
+</body>
+</html>
