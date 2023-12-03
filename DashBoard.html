@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Centered Image in Frame</title>
+    <title>Centered Image</title>
     <style>
         body {
             display: flex;
@@ -9,13 +9,24 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
         }
-        iframe {
-            border: none;
+        .image-container {
+            max-width: 80%;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <img src="https://github.com/Opaksbolu/SoftwareEngineeringgroup2/blob/main/Group%203.png?raw=true" width="300" height="600"></iframe>
+    <div class="image-container">
+        <img src="https://github.com/Opaksbolu/SoftwareEngineeringgroup2/blob/main/Group%203.png?raw=true" alt="Group Image">
+    </div>
 </body>
 </html>
