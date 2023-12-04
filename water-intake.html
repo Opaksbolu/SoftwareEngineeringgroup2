@@ -21,7 +21,7 @@
 
         #frame {
             position: relative;
-            z-index: 1;
+            z-index: -1;
             width: 300px;
             height: 600px;
             margin-bottom: 20px; /* Added margin to move it up slightly */
@@ -69,9 +69,25 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        .back-button {
+            position: absolute;
+            left: 590px; 
+            top: 610px;
+            width: 218px; 
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #cbcbcb;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <a href="dashboard.html" class="back-button">Back to Home</a>
     <div id="frame">
         <h2>Water Intake Tracker</h2>
         <form id="waterIntakeForm">
