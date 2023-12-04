@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calorie Tracking Website - User Preferences</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: beige;
+        }
+        .question-box {
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px auto;
+            width: fit-content;
+        }
+        #preferencesForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+    <script>
+        function submitPreferences() {
+            var privacyConsent = document.querySelector('input[name="privacyConsent"]:checked').value;
+            var weightConsent = document.querySelector('input[name="weightConsent"]:checked').value;
+            var profileType = document.querySelector('input[name="profileType"]:checked').value;
+            var message = "Privacy Data Consent: " + (privacyConsent === 'yes' ? "Yes" : "No") +
+                          "; Weight Data Consent: " + (weightConsent === 'yes' ? "Yes" : "No") +
+                          "; Profile Type: " + (profileType === 'public' ? "Public" : "Private");
+            document.getElementById("responseMessage").innerText = message;
+        }
+    </script>
+</head>
+<body>
+    <h2>User Preferences</h2>
+    <p>This page allows you to set your preferences regarding how the website treats your data. Please select your choices for privacy data sharing, weight data sharing, and your profile visibility.</p>
+    <form id="preferencesForm">
+        <div class="question-box">
+            <p>Do you consent to share your privacy data?</p>
+            <label><input type="radio" name="privacyConsent" value="yes" required> Yes</label>
+            <label><input type="radio" name="privacyConsent" value="no"> No</label>
+        </div>
+        <div class="question-box">
+            <p>Do you consent to share your weight data?</p>
+            <label><input type="radio" name="weightConsent" value="yes" required> Yes</label>
+            <label><input type="radio" name="weightConsent" value="no"> No</label>
+        </div>
+        <div class="question-box">
+            <p>Would you like to have a public or private profile?</p>
+            <label><input type="radio" name="profileType" value="public" required> Public</label>
+            <label><input type="radio" name="profileType" value="private"> Private</label>
+        </div>
+        <button type="button" onclick="submitPreferences()">Submit</button>
+    </form>
+    <p id="responseMessage"></p>
+</body>
+</html>
+
+
