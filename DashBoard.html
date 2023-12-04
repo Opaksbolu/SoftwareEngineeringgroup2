@@ -12,21 +12,122 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
+        
         .image-container {
             max-width: 80%;
             text-align: center;
+            z-index: -1;
         }
+        
         img {
             max-width: 100%;
             height: auto;
             display: block;
             margin: 0 auto;
         }
+
+        .nutrition-button,
+        .activity-button,
+        .water-button,
+        .walk-button,
+        .sleep-button,
+        .heart-button,
+        .back-button {
+            position: absolute;
+        }
+
+        .activity-button {
+            top: 207px;
+            left: 590px;
+            bottom: 40px;
+            right: 30px;
+            width: 100px;
+            width: 128px; 
+            height: auto;
+        }
+
+        .nutrition-button {
+            top: 210px;
+            left: 725px;
+            bottom: 40px;
+            right: 30px;
+            width: 120px; 
+            height: auto; 
+        }
+
+        .heart-button {
+            top: 338px;
+            left: 591px;
+            bottom: 40px;
+            right: 30px;
+            width: 100px;
+            width: 125px; 
+            height: auto;
+        }
+        
+        .water-button {
+            top: 340px;
+            left: 727px;
+            bottom: 40px;
+            right: 30px;
+            width: 120px; 
+            height: auto;
+        }
+        
+        .walk-button {
+            top: 470px;
+            left: 591px;
+            bottom: 40px;
+            right: 30px;
+            width: 100px;
+            width: 126px; 
+            height: auto;
+        }
+        
+        .sleep-button {
+            top: 470px;
+            left: 727px;
+            bottom: 40px;
+            right: 30px;
+            width: 123px; 
+            height: auto;
+        }
+        
+        .back-button {
+        }
+        
+        
     </style>
 </head>
 <body>
     <div class="image-container">
-        <img src="https://rawcdn.githack.com/Opaksbolu/SoftwareEngineeringgroup2/d7b6e5339cf3f562e5cd63f1532214d60ed665f6/images/Group%203.png">
+        <img src="images/Group 3.png">
     </div>
+
+    <a href="activitytrack.html" class="activity-button">
+        <img src="images/activitybutton.png" alt="Activity Button">
+    </a>
+
+    <a href="calorietrack.html" class="nutrition-button">
+        <img src="images/nutritionbutton.png" alt="Nutrition Button">
+    </a>
+
+    <a href="heartratetrack.html" class="heart-button">
+        <img src="images/heartbutton.png" alt="Heart Button">
+    </a>
+
+    <a href="-----" class="water-button">
+        <img src="images/waterbutton.png" alt="Water Button">
+    </a>
+
+    <a href="steptrack.html" class="walk-button">
+        <img src="images/walkbutton.png" alt="Walk Button">
+    </a>
+
+    <a href="sleeptrack.html" class="sleep-button">
+        <img src="images/sleepbutton.png" alt="Sleep Button">
+    </a>
+    
 </body>
 </html>
+
