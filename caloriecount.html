@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Intake Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #calculator {
+            width: 275px;
+            height: 580px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <h2>Calorie Intake Calculator</h2>
+        <label for="weight">Enter weight in kilograms: </label>
+        <input type="number" id="weight" required><br>
+
+        <label for="height">Enter height in centimeters: </label>
+        <input type="number" id="height" required><br>
+
+        <label for="age">Enter age: </label>
+        <input type="number" id="age" required><br>
+
+        <label for="gender">Enter gender (M/F): </label>
+        <input type="text" id="gender" maxlength="1" required><br>
+
+        <label for="activity-level">Enter activity level (sedentary/lightly/moderately/very/extra): </label>
+        <input type="text" id="activity-level" required><br>
+
+        <button onclick="calculateCalories()">Calculate</button>
+
+        <h3 id="result"></h3>
+    </div>
+    <script>
+function calculateCalories() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value.toUpperCase();
+            const activityLevel = document.getElementById('activity-level').value.toLowerCase();
+
+            let bmr;
+
+            if (gender === 'M') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            let calories;
+
+            switch (activityLevel) {
+                case 'sedentary':
+                    calories = bmr * 1.2;
+                    break;
+                case 'lightly':
+                    calories = bmr * 1.375;
+                    break;
+                case 'moderately':
+                    calories = bmr * 1.55;
+                    break;
+                case 'very':
+                    calories = bmr * 1.725;
+                    break;
+                case 'extra':
+                    calories = bmr * 1.9;
+                    break;
+                default:
+                    document.getElementById('result').textContent = "Invalid activity level";
+                    return;
+            }
+
+            document.getElementById('result').textContent = "Estimated daily calorie intake: " + calories.toFixed(2) + " kcal";
+}
+    </script>
+</body>
+</html>
