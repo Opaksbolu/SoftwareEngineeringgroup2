@@ -11,10 +11,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end; /* Place content at the bottom */
-            min-height: 100vh;
-            background-color: #3498db; /* Blue background color */
-            color: #fff; /* Text color */
+            justify-content: center; /* Center content both horizontally and vertically */
+            height: 100vh;
+            background-color: #fff; /* White background color */
+            color: #000; /* Black text color */
             font-family: 'Arial', sans-serif;
             overflow: hidden; /* Prevent scrolling */
         }
@@ -27,18 +27,21 @@
             margin-bottom: 20px; /* Added margin to move it up slightly */
             padding: 20px;
             box-sizing: border-box;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            background-color: #3498db; /* Blue background for the input section */
             border-radius: 10px;
             text-align: center;
+            color: #000; /* Black text color */
         }
 
         #result {
             margin-top: 20px;
             font-weight: bold;
+            color: #000; /* Black text color */
         }
 
         #progress {
             margin-top: 20px;
+            color: #000; /* Black text color */
         }
 
         #goal {
@@ -46,6 +49,8 @@
             bottom: 10px;
             width: 100%;
             text-align: center;
+            color: #333; /* Darker text color for better visibility */
+            font-size: 18px; /* Increased font size */
         }
 
         /* Style adjustments for the form inputs */
@@ -53,14 +58,25 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: #fff; /* White background for the form */
+            padding: 10px; /* Added padding for better visual separation */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
         }
 
         label, input {
             margin: 10px 0;
+            color: #000; /* Black text color */
         }
 
         button {
             margin-top: 20px;
+            background-color: #3498db; /* Blue background for the button */
+            color: #fff; /* White text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -78,17 +94,32 @@
     </div>
 
     <div id="goal">
-        <p>Daily Goal: 3 liters</p>
+        <p>Cups needed to reach the goal: <span id="cupsNeeded">0</span></p>
     </div>
 
     <script>
         let dailyGoal = 3; // Initial daily goal in liters
         let totalIntake = 0;
+        let lastDate = new Date().getDate();
+
+        function resetDailyValues() {
+            dailyGoal = 3;
+            totalIntake = 0;
+            lastDate = new Date().getDate();
+        }
 
         function logWaterIntake() {
             const intakeInput = document.getElementById("intakeAmount");
             const resultDiv = document.getElementById("result");
             const progressDiv = document.getElementById("progress");
+            const cupsNeededSpan = document.getElementById("cupsNeeded");
+
+            const currentDate = new Date().getDate();
+
+            // Reset values if a new day has started
+            if (currentDate !== lastDate) {
+                resetDailyValues();
+            }
 
             const intake = parseFloat(intakeInput.value);
 
@@ -100,8 +131,10 @@
 
                 if (remaining > 0) {
                     progressDiv.textContent = `You have ${remaining.toFixed(2)} cups left to reach your goal.`;
+                    cupsNeededSpan.textContent = remaining.toFixed(2);
                 } else {
                     progressDiv.textContent = "Congratulations! You've reached your daily water intake goal.";
+                    cupsNeededSpan.textContent = "0";
                 }
             } else {
                 resultDiv.textContent = "Please enter a valid numeric value for water intake.";
