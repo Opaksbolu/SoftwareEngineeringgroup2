@@ -1,115 +1,115 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Water Intake Tracker</title>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center; /* Center content both horizontally and vertically */
-                height: 100vh;
-                background-color: #fff; /* White background color */
-                color: #000; /* Black text color */
-                font-family: 'Arial', sans-serif;
-                overflow: hidden; /* Prevent scrolling */
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Intake Tracker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center content both horizontally and vertically */
+            height: 100vh;
+            background-color: #fff; /* White background color */
+            color: #000; /* Black text color */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+        }
 
-            #frame {
-                position: relative;
-                z-index: 1;
-                width: 300px;
-                height: 600px;
-                margin-bottom: 20px; /* Added margin to move it up slightly */
-                padding: 20px;
-                box-sizing: border-box;
-                background-color: #3498db; /* Blue background for the input section */
-                border-radius: 10px;
-                text-align: center;
-                color: #000; /* Black text color */
-            }
+        #frame {
+            position: relative;
+            z-index: 1;
+            width: 300px;
+            height: 600px;
+            margin-bottom: 20px; /* Added margin to move it up slightly */
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #3498db; /* Blue background for the input section */
+            border-radius: 10px;
+            text-align: center;
+            color: #000; /* Black text color */
+        }
 
-            #result {
-                margin-top: 20px;
-                font-weight: bold;
-                color: #000; /* Black text color */
-            }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #000; /* Black text color */
+        }
 
-            #progress {
-                margin-top: 20px;
-                color: #000; /* Black text color */
-            }
+        #progress {
+            margin-top: 20px;
+            color: #000; /* Black text color */
+        }
 
-            /* Style adjustments for the form inputs */
-            form {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background-color: #fff; /* White background for the form */
-                padding: 10px; /* Added padding for better visual separation */
-                border-radius: 10px; /* Rounded corners */
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
-            }
+        /* Style adjustments for the form inputs */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff; /* White background for the form */
+            padding: 10px; /* Added padding for better visual separation */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+        }
 
-            label, input {
-                margin: 10px 0;
-                color: #000; /* Black text color */
-            }
+        label, input {
+            margin: 10px 0;
+            color: #000; /* Black text color */
+        }
 
-            button {
-                margin-top: 20px;
-                background-color: #3498db; /* Blue background for the button */
-                color: #fff; /* White text color */
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="frame">
-            <h2>Water Intake Tracker</h2>
-            <form id="waterIntakeForm">
-                <label for="intakeAmount">Enter Water Intake (in cups):</label>
-                <input type="number" step="0.1" id="intakeAmount" required>
-                
-                <button type="button" onclick="logWaterIntake()">Log Intake</button>
-            </form>
-            <div id="result"></div>
-            <div id="progress"></div>
-        </div>
+        button {
+            margin-top: 20px;
+            background-color: #3498db; /* Blue background for the button */
+            color: #fff; /* White text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+        <h2>Water Intake Tracker</h2>
+        <form id="waterIntakeForm">
+            <label for="intakeAmount">Enter Water Intake (in cups):</label>
+            <input type="number" step="0.1" id="intakeAmount" required>
+            
+            <button type="button" onclick="logWaterIntake()">Log Intake</button>
+        </form>
+        <div id="result"></div>
+        <div id="progress"></div>
+    </div>
 
-        <script>
-            let dailyGoal = 13; // Initial daily goal in liters
-            let totalIntake = 0;
+    <script>
+        let dailyGoal = 13; // Updated daily goal in cups
+        let totalIntake = 0;
 
-            function logWaterIntake() {
-                const intakeInput = document.getElementById("intakeAmount");
-                const resultDiv = document.getElementById("result");
-                const progressDiv = document.getElementById("progress");
+        function logWaterIntake() {
+            const intakeInput = document.getElementById("intakeAmount");
+            const resultDiv = document.getElementById("result");
+            const progressDiv = document.getElementById("progress");
 
-                const intake = parseFloat(intakeInput.value);
+            const intake = parseFloat(intakeInput.value);
 
-                if (!isNaN(intake)) {
-                    totalIntake += intake;
-                    const remaining = dailyGoal - totalIntake;
+            if (!isNaN(intake) && totalIntake + intake <= dailyGoal) {
+                totalIntake += intake;
+                const remaining = dailyGoal - totalIntake;
 
-                    resultDiv.textContent = `You've consumed ${totalIntake.toFixed(2)} cups of water today.`;
+                resultDiv.textContent = `You've consumed ${totalIntake.toFixed(2)} cups of water today.`;
 
-                    if (remaining > 0) {
-                        progressDiv.textContent = `You have ${remaining.toFixed(2)} cups left to reach your goal.`;
-                    } else {
-                        progressDiv.textContent = "Congratulations! You've reached your daily water intake goal.";
-                    }
+                if (remaining > 0) {
+                    progressDiv.textContent = `You have ${remaining.toFixed(2)} cups left to reach your goal.`;
                 } else {
-                    resultDiv.textContent = "Please enter a valid numeric value for water intake.";
+                    progressDiv.textContent = "Congratulations! You've reached your daily water intake goal.";
                 }
+            } else {
+                resultDiv.textContent = "Please enter a valid numeric value for water intake, and ensure it does not exceed the daily goal.";
             }
-        </script>
-    </body>
-    </html>
+        }
+    </script>
+</body>
+</html>
