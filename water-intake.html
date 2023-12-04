@@ -95,7 +95,7 @@
 
             const intake = parseFloat(intakeInput.value);
 
-            if (!isNaN(intake) && totalIntake + intake <= dailyGoal) {
+            if (!isNaN(intake)) {
                 totalIntake += intake;
                 const remaining = dailyGoal - totalIntake;
 
@@ -107,7 +107,7 @@
                     progressDiv.textContent = "Congratulations! You've reached or exceeded your daily water intake goal.";
                 }
             } else {
-                resultDiv.textContent = "Please enter a valid numeric value for water intake, and ensure it does not exceed the daily goal.";
+                resultDiv.textContent = "Please enter a valid numeric value for water intake.";
             }
         }
     </script>
